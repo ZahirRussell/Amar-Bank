@@ -8,6 +8,98 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container" id="loginArea">       
+        <div class="submitArea col-md-6 col-md-ofset3">
+            <h3 class="text-center">Welcome to Amar Bank</h1>
+                <br>
+            <input type="text" class="form-control" placeholder="User Name">
+            <br>
+            <input type="password" class="form-control" placeholder="******">
+            <br>
+            <button id="loginButton" class="btn btn-success">Login</button>
+        </div>
+    </div>
+
+    <div class="container" id="transectionArea">
+        <div class="row">
+            <div class="col-md-4">
+               <div class="deposit status">
+                <h3>Deposit</h3>
+                <p>$<span id="depositAmount">00</span></p>
+               </div>                
+            </div>
+            <div class="col-md-4">
+               <div class="withdraw status">
+                <h3>Withdraw</h3>
+                <p>$<span id="withdrawAmount">00</span></p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="balance status">
+                <h3>Balance</h3>
+                <p>$<span id="balanceAmount">1200</span></p>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submitArea">
+                    <input id="depositTextbox" type="text" class="form-control" placeholder="$ Amount Deposited">
+                    <br>
+                    <button id="depositButton" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submitArea">
+                    <input id ="withdrawTextbox" type="text" class="form-control" placeholder="$ Amount Withdraw">
+                    <br>
+                    <button id="withdrawButton" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+
+    //Login Button Event
+   var loginButton = document.getElementById('loginButton');
+   loginButton.addEventListener('click',function(){
+       var loginArea = document.getElementById('loginArea');
+       loginArea.style.display = "none";
+
+       var transectionArea = document.getElementById('transectionArea');
+       transectionArea.style.display = "block";
+   })
+
+//Deposit Button Event
+
+var depositButton  = document.getElementById("depositButton");
+depositButton.addEventListener('click',function(){ 
+    var inputedAmount = parseFloat(document.getElementById('depositTextbox').value); 
+
+    updateSpanText('depositAmount',inputedAmount);
+
+    updateSpanText('balanceAmount',inputedAmount);
+    document.getElementById('depositTextbox').value = "";  
+
+})
+
+//withdraw Button Event
+
+var withdrawButton  = document.getElementById("withdrawButton");
+
+withdrawButton.addEventListener('click',function(){       
+    var inputedAmount = parseFloat(document.getElementById('withdrawTextbox').value); 
+    updateSpanText('withdrawAmount',inputedAmount);
+    updateSpanText('balanceAmount', -1 * inputedAmount);
+
+    document.getElementById('withdrawTextbox').value = "";
+})
+
+function updateSpanText(id,inputedAmount)
+{  
+    var currentAmount = parseFloat(document.getElementById(id).innerText);     
+    document.getElementById(id).innerText = currentAmount + inputedAmount;
+}
+</script>
 </body>
 </html>
